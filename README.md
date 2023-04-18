@@ -3,11 +3,12 @@
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-
 - [Description](#description)
 - [Example](#example)
 - [Requirements](#requirements)
 - [Providers](#providers)
+- [Modules](#modules)
+- [Resources](#resources)
 - [Inputs](#inputs)
 - [Outputs](#outputs)
 
@@ -30,7 +31,7 @@ locals {
 }
 
 module "ecr" {
-  source = "git@github.com:basefarm/terraform-aws-ecr?ref=v0.1.0"
+  source = "terraform-aws-ecr"
 
   names               = local.ecr_repos
   max_images_retained = 500
@@ -50,31 +51,43 @@ module "ecr" {
 
 | Name | Version |
 |------|---------|
-| terraform | >= 0.12 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.12 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| aws | n/a |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | n/a |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+|------|------|
+| [aws_ecr_lifecycle_policy.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecr_lifecycle_policy) | resource |
+| [aws_ecr_repository.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecr_repository) | resource |
+| [aws_ecr_repository_policy.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecr_repository_policy) | resource |
+| [aws_iam_policy_document.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| actions | IAM policy actions | `list` | <pre>[<br>  "ecr:BatchCheckLayerAvailability",<br>  "ecr:BatchGetImage",<br>  "ecr:GetAuthorizationToken",<br>  "ecr:GetDownloadUrlForLayer"<br>]</pre> | no |
-| custom\_policy\_json | Custom policy created from aws\_iam\_policy\_document json to apply to repos | `any` | `null` | no |
-| enable\_scan\_on\_push | Enable vulnerability scanning on image push | `bool` | `true` | no |
-| image\_tag\_mutability | The tag mutability setting for the repository | `bool` | `true` | no |
-| max\_images\_retained | The max number of images to keep in the repository before expiring the oldest | `number` | `100` | no |
-| names | ECR repo names | `list` | n/a | yes |
-| tags | A map of tags (key-value pairs) passed to resources. | `map` | `{}` | no |
-| trusted\_accounts | IDs of other accounts that are trusted to these repositories | `list` | `[]` | no |
+| <a name="input_actions"></a> [actions](#input\_actions) | IAM policy actions | `list(any)` | <pre>[<br>  "ecr:BatchCheckLayerAvailability",<br>  "ecr:BatchGetImage",<br>  "ecr:GetAuthorizationToken",<br>  "ecr:GetDownloadUrlForLayer"<br>]</pre> | no |
+| <a name="input_custom_policy_json"></a> [custom\_policy\_json](#input\_custom\_policy\_json) | Custom policy created from aws\_iam\_policy\_document json to apply to repos | `any` | `null` | no |
+| <a name="input_enable_scan_on_push"></a> [enable\_scan\_on\_push](#input\_enable\_scan\_on\_push) | Enable vulnerability scanning on image push | `bool` | `true` | no |
+| <a name="input_image_tag_mutability"></a> [image\_tag\_mutability](#input\_image\_tag\_mutability) | The tag mutability setting for the repository | `bool` | `true` | no |
+| <a name="input_max_images_retained"></a> [max\_images\_retained](#input\_max\_images\_retained) | The max number of images to keep in the repository before expiring the oldest | `number` | `100` | no |
+| <a name="input_names"></a> [names](#input\_names) | ECR repo names | `list(any)` | n/a | yes |
+| <a name="input_tags"></a> [tags](#input\_tags) | A map of tags (key-value pairs) passed to resources. | `map(any)` | `{}` | no |
+| <a name="input_trusted_accounts"></a> [trusted\_accounts](#input\_trusted\_accounts) | IDs of other accounts that are trusted to these repositories | `list(any)` | `[]` | no |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| repos | Map of the ECR repositories |
-
+| <a name="output_repos"></a> [repos](#output\_repos) | Map of the ECR repositories |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

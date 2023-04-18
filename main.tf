@@ -18,7 +18,7 @@ resource "aws_ecr_repository" "this" {
 resource "aws_ecr_repository_policy" "this" {
   for_each   = aws_ecr_repository.this
   repository = each.value.id
-  policy     = data.aws_iam_policy_document.this.json
+  policy     = var.custom_policy_json != null ? var.custom_policy_json : data.aws_iam_policy_document.this.json
 }
 
 data "aws_iam_policy_document" "this" {
@@ -33,12 +33,6 @@ data "aws_iam_policy_document" "this" {
 
     actions = var.actions
   }
-}
-
-resource "aws_ecr_repository_policy" "custom" {
-  for_each   = var.custom_policy_json != null ? aws_ecr_repository.this : {}
-  repository = each.value.id
-  policy     = var.custom_policy_json
 }
 
 resource "aws_ecr_lifecycle_policy" "this" {

@@ -1,6 +1,6 @@
 variable "names" {
   description = "ECR repo names"
-  type        = list
+  type        = list(any)
 }
 
 variable "max_images_retained" {
@@ -11,13 +11,13 @@ variable "max_images_retained" {
 
 variable "trusted_accounts" {
   description = "IDs of other accounts that are trusted to these repositories"
-  type        = list
+  type        = list(any)
   default     = []
 }
 
 variable "tags" {
   description = "A map of tags (key-value pairs) passed to resources."
-  type        = map
+  type        = map(any)
   default     = {}
 }
 
@@ -35,7 +35,7 @@ variable "enable_scan_on_push" {
 
 variable "actions" {
   description = "IAM policy actions"
-  type        = list
+  type        = list(any)
   default = [
     "ecr:BatchCheckLayerAvailability",
     "ecr:BatchGetImage",
